@@ -62,6 +62,7 @@ const startServer = async () => {
     console.log(`   Health:    GET  http://localhost:${PORT}/health`);
     console.log(`   Questions: GET  http://localhost:${PORT}/questions`);
     console.log(`              GET  http://localhost:${PORT}/questions/:id`);
+    console.log(`              GET  http://localhost:${PORT}/questions/?topics=Arrays,Dynamic%20Programming&difficulty=Medium`);
     console.log(`              POST http://localhost:${PORT}/questions  [Admin]`);
     console.log(`              PUT  http://localhost:${PORT}/questions/:id  [Admin]`);
     console.log(`              DELETE http://localhost:${PORT}/questions/:id  [Admin]`);
