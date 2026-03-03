@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { cancelMatchRequest, enqueue, getUserState } from "../matchingEngine";
+import { cancelMatchRequest, enqueue, getUserState } from "../controllers/matchingController";
 import { QueueRequestSchema, UserIdRequestSchema } from "../validators/match.schema";
 
 const router = Router();

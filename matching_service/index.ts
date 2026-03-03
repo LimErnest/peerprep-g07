@@ -1,6 +1,6 @@
 import express from "express";
-import matchingRoutes from "./routes/matchingRoutes";
-import { cleanupTimedOutUsers } from "./matchingEngine";
+import { cleanupTimedOutUsers } from "./src/controllers/matchingController";
+import matchingRoutes from "./src/routes/matchingRoutes";
 
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import { queueMap, userStateMap } from "./inMemoryStore";
+import { queueMap, userStateMap } from "../inMemoryStore";
 import {
   EnqueueResult,
   Match,
@@ -7,8 +7,8 @@ import {
   QueueKeyString,
   QueueRequest,
   UserStateResponse,
-} from "./types";
-import { toQueueKey } from "./utils";
+} from "../types";
+import { toQueueKey } from "../utils";
 
 // const TIMEOUT_MS = 2 * 60 * 1000; // 2 mins timeout
 const TIMEOUT_MS = 10 * 1000; // 10 seconds timeout for testing purposes
