@@ -84,13 +84,14 @@ wss.on('connection', (ws, req) => {
                 where nums[i] + nums[j] + nums[k] == 0, and the indices i, j and k are all distinct.
                 The output should not contain any duplicate triplets. 
                 You may return the output and the triplets in any order.`;
+                const programmingLanguage = "python";
 
                 // Create a new room and store the clients
                 rooms[roomId] = [ws, otherWs];
 
                 // Notify both clients about the match and room ID
-                ws.send(JSON.stringify({ type: 'match_found', roomId, question }));
-                otherWs.send(JSON.stringify({ type: 'match_found', roomId, question }));
+                ws.send(JSON.stringify({ type: 'match_found', roomId, question, programmingLanguage }));
+                otherWs.send(JSON.stringify({ type: 'match_found', roomId, question, programmingLanguage }));
 
             } else {
                 // No match found, add user to waiting list

@@ -6,12 +6,25 @@ import React from 'react'
 
 export default function App() {
 
-  const [question, setQuestion] = React.useState("")
+  const [question, setQuestion] = React.useState("Default Question")
+  const [programmingLanguage, setProgrammingLanguage] = React.useState("javascript")
 
   return (
     <Routes>
-      <Route path="/" element={<MatchingPage setQuestion={setQuestion}/>} />
-      <Route path="/codingspace" element={<CodingSpace question={question} />} />
+      <Route 
+        path="/" 
+        element={<MatchingPage 
+                    setQuestion={setQuestion} 
+                    setProgrammingLanguage={setProgrammingLanguage}
+                />} 
+      />
+      <Route 
+        path="/codingspace" 
+        element={<CodingSpace 
+                    question={question} 
+                    programmingLanguage={programmingLanguage} 
+                />} 
+      />
     </Routes>
   )
 }

@@ -6,52 +6,14 @@ import Editor from "@monaco-editor/react"
 
 interface CodingSpaceProps {
     question: string;
+    programmingLanguage: string;
 }
 
-export default function CodingSpace({ question }: CodingSpaceProps) {
+export default function CodingSpace({ question, programmingLanguage }: CodingSpaceProps) {
 
     // Get roomID from URL
     const [searchParams] = useSearchParams();
     const roomId = searchParams.get("roomId")
-
-    // useEffect(() => {
-
-    //     // this is if user enter /codingspace into the url without roomId
-    //     if (!roomId) {
-    //         console.log("No room ID provided in URL")
-    //         return
-    //     }
-
-    //     // Create a new Y.Doc for this coding space
-    //     const ydoc = new Y.Doc()
-
-    //     // Connection to collaboration Server
-    //     const provider = new WebsocketProvider(
-    //         'ws://localhost:8080/yjs',
-    //         roomId, 
-    //         ydoc
-    //     )
-
-    //     // Create a shared text type in the Y.Doc for the Monaco editor
-    //     const type = ydoc.getText('monaco')
-
-    //     // Initialize Monaco editor
-    //     const editor = monaco.editor.create(editorRef.current, {
-    //         value: '',
-    //         language: 'javascript',
-    //         theme: 'vs-dark',
-    //     }
-
-
-    //     // Bind Monaco
-
-    //     // Clean up when components unmounts, disconnect from the provider 
-    //     // and destroy the Y.Doc
-    //     return () => {
-    //         provider.disconnect()
-    //         ydoc.destroy()
-    //     }
-    // }, [roomId])
 
     const handleEditorMount = (editor: any) => {
         if (!roomId) return
@@ -86,13 +48,14 @@ export default function CodingSpace({ question }: CodingSpaceProps) {
 
     return (
         <>
-            <div>
-                <h3>Question: {question}</h3>
+            <div className="flex flex-col items-center justify-center">
+                <h5>Question: {question}</h5>
+                    
+                <p>Language: {programmingLanguage}</p>
 
-                <p>Editor Space</p>
                 <Editor
                     height="500px"
-                    defaultLanguage="javascript"
+                    defaultLanguage={programmingLanguage}
                     defaultValue=""
                     theme="vs-dark"
                     onMount={(editor) => handleEditorMount(editor)}

@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom'
 
 interface MatchingPageProps {
     setQuestion: (question: string) => void
+    setProgrammingLanguage: (language: string) => void
 }
 
-export default function MatchingPage({ setQuestion }: MatchingPageProps) {
+export default function MatchingPage({ setQuestion, setProgrammingLanguage }: MatchingPageProps) {
 
     const navigate = useNavigate()
     const [isFindingMatch, setIsFindingMatch] = useState(false)
@@ -23,6 +24,7 @@ export default function MatchingPage({ setQuestion }: MatchingPageProps) {
                 console.log("Match found, room ID: ", data.roomId)
                 console.log("Matched with another user!")
                 setQuestion(data.question)
+                setProgrammingLanguage(data.programmingLanguage)
                 navigate(`/codingspace?roomId=${data.roomId}}`)
             }
         }
