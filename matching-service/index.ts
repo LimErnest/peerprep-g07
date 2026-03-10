@@ -1,12 +1,21 @@
-import { pollAllQueues } from "./src/worker/matchingWorker";
-import { redis } from "./src/redis/redisClient";
+import express from 'express';
+import { WebSocketServer } from 'ws';
+import { handleWsConnection } from './src/routes/matchingRoutes';
+import { pollAllQueues } from './src/matching-worker/matchingWorker';
+import { startMatchSubscriber } from './src/redis/redisSubscriber';
 
-async function main() {
-  console.log("Matching worker started");
-  await redis.ping(); // verify connection before starting
-  setInterval(() => {
-    pollAllQueues();
-  }, 2000);
-}
+const PORT = process.env.PORT || 3002;
 
-main();
+const app = express();
+app.use(express.json());
+
+const server = app.listen(PORT, () => {
+  console.log(`Matching service listening on port ${PORT}`);
+});
+
+const wss = new WebSocketServer({ server });
+wss.on('connection', handleWsConnection);
+
+setInterval(() => pollAllQueues(), 10000);
+
+startMatchSubscriber();

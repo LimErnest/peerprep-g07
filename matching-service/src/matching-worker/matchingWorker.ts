@@ -45,7 +45,7 @@ async function tryMatch(topic: Topic, difficulty: Difficulty, language: Language
     language,
     createdAt: Date.now(),
   });
-
+  console.log(`Publishing match event: ${matchEvent}`);
   await redis.publish("match.events", matchEvent);
   console.log(`Matched ${user1Id} and ${user2Id} into room ${roomId}`);
 }
