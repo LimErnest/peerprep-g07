@@ -1,4 +1,4 @@
-export const TOPICS = ["arrays", "linked-lists", "trees", "graphs", "dynamic-programming", "algorithms", "system-design", "strings", "data-structures"] as const;
+export const TOPICS = ["arrays", "linked-lists", "trees", "graphs", "dynamic-programming", "strings", "algorithms", "system-design", "data-structures"] as const;
 export const DIFFICULTIES = ["easy", "medium", "hard"] as const;
 export const LANGUAGES = ["javascript", "python", "java", "cpp", "typescript", "go", "ruby", "csharp"] as const;
 
@@ -20,7 +20,7 @@ export type QueueRequest = {
 }
 
 export type Match = {
-  matchId: string;
+  roomId: string;
   users: [string, string];
   createdAt: number;
   topic: Topic;
@@ -28,12 +28,13 @@ export type Match = {
   language: Language;
 };
 
-export type EnqueueResult =
-| { status: "queued"; queueKey: string }
-| { status: "matched"; match: Match }
-| { status: "error"; message: string };
+export type InboundMessage =
+ | { type: "enqueue"; topic: Topic; difficulty: Difficulty; language: Language; }
+ | { type: "cancel"; };
 
-export type UserStateResponse =
-  | { state: "queued"; queueKey: string; elapsedMs: number; queueLength: number }
-  | { state: "matched"; match: Match }
-  | { state: "timeout" };
+ export type OutboundMessage =
+ | { type: "queued"; queueKey: QueueKeyString }
+ | { type: "matched"; match: Match }
+ | { type: "timeout" }
+ | { type: "cancelled" }
+ | { type: "error"; message: string };
