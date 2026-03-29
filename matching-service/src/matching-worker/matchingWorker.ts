@@ -148,18 +148,6 @@ async function publishMatchAndCreateRoom(
 ): Promise<void> {
   const roomId = randomUUID();
 
-  const matchEvent = JSON.stringify({
-    users: [user1Id, user2Id],
-    roomId,
-    topic,
-    difficulty,
-    language,
-    createdAt: Date.now(),
-  });
-  console.log(`Publishing match event: ${matchEvent}`);
-  await redis.publish("match.events", matchEvent);
-  console.log(`Matched ${user1Id} and ${user2Id} into room ${roomId}`);
-
   try {
     const capDifficulty =
       difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
@@ -184,6 +172,19 @@ async function publishMatchAndCreateRoom(
   } catch (err) {
     console.error(`Failed to create room ${roomId} in collab Redis:`, err);
   }
+
+  const matchEvent = JSON.stringify({
+    users: [user1Id, user2Id],
+    roomId,
+    topic,
+    difficulty,
+    language,
+    createdAt: Date.now(),
+  });
+
+  console.log(`Publishing match event: ${matchEvent}`);
+  await redis.publish("match.events", matchEvent);
+  console.log(`Matched ${user1Id} and ${user2Id} into room ${roomId}`);
 }
 
 async function tryRelaxedMatch(): Promise<boolean> {
