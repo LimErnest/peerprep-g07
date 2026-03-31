@@ -93,7 +93,7 @@ services:
     restart: unless-stopped
 
   collaboration-service:
-    build: ./collaboration_service/backend
+    build: ./collaboration-service
     container_name: collaboration-service
     environment:
       - REDIS_URL=redis://collab-redis:6379
