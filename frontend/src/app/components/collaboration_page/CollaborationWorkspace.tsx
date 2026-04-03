@@ -132,7 +132,7 @@ export function CollaborationWorkspace() {
   }, []);
 
   // Set username from JWT, then generated fallback.
-  const username = useMemo(() => {  
+  const username = useMemo(() => {
     if (tokenPayload?.username && tokenPayload.username.trim()) {
       return tokenPayload.username;
     }
@@ -707,9 +707,9 @@ export function CollaborationWorkspace() {
           </div>
 
           <div className="border-2 border-gray-300 rounded-lg overflow-hidden bg-gray-50">
-            <UIEditor 
-                roomId={roomId || ""} 
-                programmingLanguage={roomData.programmingLanguage} 
+            <UIEditor
+                roomId={roomId || ""}
+                programmingLanguage={roomData.programmingLanguage}
               />
           </div>
 
