@@ -67,6 +67,8 @@ export async function getProfile(): Promise<UserProfile> {
 
 export async function updateProfile(username: string) {
   const response = await apiClient.patch('/users/me', { username });
+  const { token } = response.data;
+  localStorage.setItem('token', token); // Update token with new username info
   return response.data;
 }
 
