@@ -470,6 +470,7 @@ export function UserProfileScreen() {
           </div>
         </div>
       </div>
+    </div>
 
       <AttemptHistoryPanel
         attempts={attempts}
@@ -478,6 +479,5 @@ export function UserProfileScreen() {
         emptyMessage="No attempts recorded yet. Your saved collaboration submissions will appear here."
       />
     </div>
-  </div>
   );
 }
