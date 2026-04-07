@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { useRef, useState, type ChangeEvent } from "react";
 import { createQuestion } from "@/app/services/questionService";
+import { extractApiErrorMessage } from "@/app/utils/apiError";
 
 interface AddQuestionScreenProps {
   onBack: () => void;
@@ -93,8 +94,8 @@ export function AddQuestionScreen({ onBack, onSave }: AddQuestionScreenProps) {
       });
       if (onSave) onSave();
       onBack();
-    } catch (err: { response?: { data?: { error?: string; message?: string } } }) {
-      setError(err.response?.data?.error || err.response?.data?.message || "Failed to create question");
+    } catch (err: unknown) {
+      setError(extractApiErrorMessage(err, "Failed to save question. Please try again."));
     } finally {
       setIsLoading(false);
     }

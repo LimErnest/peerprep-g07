@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getAllUsers, updateUserRole, type UserProfile } from "@/app/services/authService";
+import { extractApiErrorMessage } from "@/app/utils/apiError";
 
 export function AdminPanel() {
   const [users, setUsers] = useState<UserProfile[]>([]);
@@ -28,8 +29,8 @@ export function AdminPanel() {
     try {
       const data = await getAllUsers();
       setUsers(data);
-    } catch (err: { response?: { data?: { error?: string } } }) {
-      setError(err.response?.data?.error || "Failed to load users. You may not have root admin access.");
+    } catch (err: unknown) {
+      setError(extractApiErrorMessage(err, "Failed to load users. You may not have root admin access."));
     } finally {
       setIsLoading(false);
     }
@@ -46,8 +47,8 @@ export function AdminPanel() {
       setActionMessage(`Successfully updated role for ${email} to ${newRole}`);
       setConfirmAction(null);
       fetchUsers();
-    } catch (err: { response?: { data?: { error?: string } } }) {
-      setActionMessage(err.response?.data?.error || "Failed to update role");
+    } catch (err: unknown) {
+      setActionMessage(extractApiErrorMessage(err, "Failed to update role"));
     }
   };
 

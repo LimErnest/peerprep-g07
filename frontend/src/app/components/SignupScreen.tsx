@@ -4,6 +4,7 @@ import { Label } from "@/app/components/ui/label";
 import { useState } from "react";
 import { signup } from "@/app/services/authService";
 import { SciFiBackground } from "@/app/components/SciFiBackground";
+import { extractApiErrorMessage } from "@/app/utils/apiError";
 
 interface SignupScreenProps {
   onNavigateToLogin: () => void;
@@ -31,8 +32,9 @@ export function SignupScreen({ onNavigateToLogin }: SignupScreenProps) {
     try {
       await signup({ email, username, password });
       onNavigateToLogin();
-    } catch (err: { response?: { data?: { error?: string } } }) {
-      setError(err.response?.data?.error || "Signup failed. Please try again.");
+    } catch (err: unknown) {
+      const msg = extractApiErrorMessage(err, "Signup failed. Please try again.");
+      setError(msg);
     } finally {
       setIsLoading(false);
     }
