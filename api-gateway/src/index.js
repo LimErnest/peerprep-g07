@@ -9,6 +9,7 @@ import questionRoutes from './routes/questionRoutes.js';
 import attemptHistoryRoutes from './routes/attemptHistoryRoutes.js';
 import matchingRoutes from './routes/matchingRoutes.js';
 import collaborationRoutes from './routes/collaborationRoutes.js';
+import executionRoutes from './routes/executionRoutes.js';
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ app.use('/api/questions', questionRoutes);
 app.use('/api/attempt-history', attemptHistoryRoutes);
 app.use('/api/match', matchingRoutes);
 app.use('/api/collab', collaborationRoutes);
+app.use('/api/execute', executionRoutes);
 
 // WebSocket proxy to matching service
 const matchingWsProxy = createProxyMiddleware({
