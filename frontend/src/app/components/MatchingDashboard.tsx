@@ -56,7 +56,7 @@ interface PendingMatchInfo {
 interface MatchingDashboardProps {
   onMatchingStateChange?: (isSearching: boolean) => void;
 }
-  const MATCH_ACCEPT_TIMEOUT_SECONDS = 15;
+  const MATCH_ACCEPT_TIMEOUT_SECONDS = 20;
 const TOPIC_MAP: Record<string, string> = {
   "Algorithms": "algorithms",
   "Data Structures": "data-structures",
