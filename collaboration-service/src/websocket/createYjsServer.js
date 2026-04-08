@@ -2,6 +2,7 @@ const WebSocket = require('ws');
 const crypto = require('crypto');
 
 const CHAT_LOG_LIMIT = 200;
+const COLLAB_USER_ROOM_MAP_KEY = 'collab.users.room';
 
 function createYjsServer({ port, redisClient }) {
     const yjsRooms = {};
@@ -31,6 +32,18 @@ function createYjsServer({ port, redisClient }) {
         const currentParticipants = roomData && roomData.participantUserIds
             ? JSON.parse(roomData.participantUserIds)
             : [];
+        let initialUserIds = [];
+
+        if (roomData && roomData.initialUserIds) {
+            try {
+                const parsedInitialUserIds = JSON.parse(roomData.initialUserIds);
+                if (Array.isArray(parsedInitialUserIds)) {
+                    initialUserIds = parsedInitialUserIds.filter((item) => typeof item === 'string');
+                }
+            } catch (err) {
+                console.error(`Invalid initialUserIds in redis for room ${roomId}:`, err);
+            }
+        }
 
         if (!Array.isArray(currentParticipants)) {
             return;
@@ -40,11 +53,13 @@ function createYjsServer({ port, redisClient }) {
             (participant) => participant !== departingUser
         );
 
+        // participantUserIds is saved in redis hSet as username
         await redisClient.hSet(roomKey, {
             participantUserIds: JSON.stringify(updatedParticipants),
         });
 
         if (updatedParticipants.length === 0) {
+            await redisClient.hDel(COLLAB_USER_ROOM_MAP_KEY, ...initialUserIds);
             const chatKey = `room:${roomId}:chat`;
             await redisClient.del(roomKey, chatKey);
             console.log(`Deleted empty room data for room ${roomId}`);
