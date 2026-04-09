@@ -90,7 +90,7 @@ export function MatchingDashboard({ onMatchingStateChange }: MatchingDashboardPr
   const [showWarning, setShowWarning] = useState(false);
   const [matchData, setMatchData] = useState<MatchInfo | null>(null);
   const [pendingMatchData, setPendingMatchData] = useState<PendingMatchInfo | null>(null);
-  const [currentUserId, setCurrentUserId] = useState<string>("");
+  const [currentUsername, setCurrentUsername] = useState<string>("");
   const [peerUserProfile, setPeerUserProfile] = useState<UserProfile | null>(null);
   const [hasAcceptedMatch, setHasAcceptedMatch] = useState(false);
   const [matchAcceptTimeRemaining, setMatchAcceptTimeRemaining] = useState(MATCH_ACCEPT_TIMEOUT_SECONDS);

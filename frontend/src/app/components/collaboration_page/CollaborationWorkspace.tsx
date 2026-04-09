@@ -443,12 +443,12 @@ export function CollaborationWorkspace() {
       const fetchParticipantProfiles = async () => {
         const profiles: Record<string, UserProfile> = {};
         // Fetch profiles for all participants in parallel
-        await Promise.all((roomData.participantUserIds?.map(async (participantId) => {
+        await Promise.all((roomData.participantUsernames?.map(async (participantName) => {
           try {
-            const profile = await getProfileByUsername(participantId);
-            profiles[participantId] = profile;
+            const profile = await getProfileByUsername(participantName);
+            profiles[participantName] = profile;
           } catch (error) {
-            console.error(`Failed to fetch profile for user: ${participantId}`, error);
+            console.error(`Failed to fetch profile for user: ${participantName}`, error);
           }
         }) || []));
 
