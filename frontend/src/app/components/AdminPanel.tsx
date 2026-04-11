@@ -8,8 +8,7 @@ import {
   User,
   Crown,
   ArrowUpCircle,
-  ArrowDownCircle,
-  AlertTriangle
+  ArrowDownCircle
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { getAllUsers, updateUserRole, type UserProfile } from "@/app/services/authService";
