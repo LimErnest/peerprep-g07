@@ -313,6 +313,7 @@ async function removeUserPendingMappingsByPendingMatchId(
   }
 }
 
+// AI-generated (edited by Alden)
 async function abandonPendingMatch(userId: string): Promise<boolean> {
   const pendingMatchId = await redis.hget(USER_PENDING_MATCH_KEY, userId);
   if (!pendingMatchId) {
