@@ -185,3 +185,170 @@ Detailed ReadMe generated, showing all the different functions and API routes an
 
 # Author Notes:
 Read through and verified the correctness of the things written
+
+# Date/Time:
+2026-02-21 21:06
+
+# Tool:
+GitHub Copilot
+
+# Prompt/Command:
+Create the questions table with title, description, difficulty, topics, test cases, and timestamps
+
+# Output Summary:
+Added the PostgreSQL schema for storing questions, including constraints for difficulty and a trigger to update timestamps automatically
+
+# Action Taken:
+- [x] Accepted as-is
+- [ ] Modified
+- [ ] Rejected
+
+# Author Notes:
+Started the question service and confirmed the table, constraints, and timestamp trigger were created correctly in Postgres
+
+
+# Date/Time:
+2026-02-22 18:07
+
+# Tool:
+GitHub Copilot
+
+# Prompt/Command:
+Let GET /questions filter by difficulty and multiple topics
+
+# Output Summary:
+Added support for filtering questions by difficulty and comma-separated topics in the query string
+
+# Action Taken:
+- [x] Accepted as-is
+- [ ] Modified
+- [ ] Rejected
+
+# Author Notes:
+Tested the endpoint with Postman using single-topic, multi-topic, and combined difficulty filters
+
+
+# Date/Time:
+2026-03-07 00:13
+
+# Tool:
+GitHub Copilot
+
+# Prompt/Command:
+Protect create, update, and delete question routes with admin auth
+
+# Output Summary:
+Added bearer token middleware that checks the user role through the user service before allowing admin-only actions
+
+# Action Taken:
+- [ ] Accepted as-is
+- [x] Modified
+- [ ] Rejected
+
+# Author Notes:
+Adjusted the role check to match the actual internal auth route and verified 401, 403, and 200 responses with test tokens
+
+
+# Date/Time:
+2026-03-22 16:28
+
+# Tool:
+GitHub Copilot
+
+# Prompt/Command:
+Allow question images to be uploaded and saved as URLs
+
+# Output Summary:
+Added multipart image upload handling, file validation, S3 integration, and image URL storage for question create and update flows
+
+# Action Taken:
+- [x] Accepted as-is
+- [ ] Modified
+- [ ] Rejected
+
+# Author Notes:
+Uploaded PNG and JPG files through Postman and confirmed the returned image URLs were stored and could be removed correctly
+
+
+# Date/Time:
+2026-03-29 15:12
+
+# Tool:
+GitHub Copilot
+
+# Prompt/Command:
+Add a cron job to pull questions from LeetCode into the database
+
+# Output Summary:
+Added a scheduler that fetches LeetCode problems, maps the fields to the local schema, and stores sync progress in the database
+
+# Action Taken:
+- [ ] Accepted as-is
+- [x] Modified
+- [ ] Rejected
+
+# Author Notes:
+The initial version needed cleanup for incomplete upstream data, so retry logic and stricter content checks were added after testing
+
+
+# Date/Time:
+2026-03-30 17:38
+
+# Tool:
+GitHub Copilot
+
+# Prompt/Command:
+Add GET /questions/random to return one question for a topic and difficulty
+
+# Output Summary:
+Added a random question endpoint with query validation and a 404 response when no matching question exists
+
+# Action Taken:
+- [x] Accepted as-is
+- [ ] Modified
+- [ ] Rejected
+
+# Author Notes:
+Called the endpoint with valid and invalid query parameters and confirmed the response shape matched frontend needs
+
+
+# Date/Time:
+2026-04-04 16:32
+
+# Tool:
+GitHub Copilot
+
+# Prompt/Command:
+Add page and pageSize query params to GET /questions
+
+# Output Summary:
+Added pagination for the question list and returned total count, current page, page size, and next/previous page metadata
+
+# Action Taken:
+- [x] Accepted as-is
+- [ ] Modified
+- [ ] Rejected
+
+# Author Notes:
+Tested first page, later pages, and out-of-range page requests to confirm pagination values were computed correctly
+
+
+# Date/Time:
+2026-04-10 02:21
+
+# Tool:
+GitHub Copilot
+
+# Prompt/Command:
+Prevent duplicate questions by title or LeetCode link
+
+# Output Summary:
+Added normalized duplicate checks and conflict responses for create and update requests when a similar question already exists
+
+# Action Taken:
+- [x] Accepted as-is
+- [ ] Modified
+- [ ] Rejected
+
+# Author Notes:
+Tried creating duplicates with different spacing, trailing slashes, and query strings to confirm the service still rejected them consistently
