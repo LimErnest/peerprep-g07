@@ -1,3 +1,8 @@
+// AI Assistance Disclosure:
+// Tool: Github Copilot, date: 2026‑04‑07
+// Scope: Add 60s window for rooms to stay before deletion; removal and addition of users for pariticipant list backend      
+// Author review: I validated correctness through user testing, edited for style and consistency, and added comments for clarity.
+
 const WebSocket = require('ws');
 const crypto = require('crypto');
 
@@ -11,7 +16,6 @@ function createYjsServer({ port, redisClient }) {
     const yjsUpdateCache = {};
     const chatRooms = {};
 
-    // 
     const roomDeletionTimers = {};
 
     const getYjsUpdatesKey = (roomId) => `room:${roomId}:yjs:updates`;
@@ -79,6 +83,7 @@ function createYjsServer({ port, redisClient }) {
         console.log(`Cancelled pending room deletion for room ${roomId}`);
     };
 
+    // AI-generated (edited by Lim Yun Jie Ernest)
     const scheduleRoomDeletion = (roomId) => {
         if (roomDeletionTimers[roomId]) {
             return;
@@ -136,6 +141,7 @@ function createYjsServer({ port, redisClient }) {
         console.log(`Scheduled room deletion for room ${roomId} in ${ROOM_DELETE_GRACE_MS}ms`);
     };
 
+    // AI-generated (edited by Lim Yun Jie Ernest)
     const addParticipant = async (roomId, joinedUser) => {
         const roomKey = `room:${roomId}`;
         const roomData = await redisClient.hGetAll(roomKey);
@@ -154,6 +160,7 @@ function createYjsServer({ port, redisClient }) {
         }
     };
 
+    // AI-generated (edited by Lim Yun Jie Ernest)
     const removeParticipant = async (roomId, departingUser) => {
         const roomKey = `room:${roomId}`;
         const roomData = await redisClient.hGetAll(roomKey);

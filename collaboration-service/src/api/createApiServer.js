@@ -1,3 +1,8 @@
+// AI Assistance Disclosure:
+// Tool: Github Copilot, date: 2026‑04‑07
+// Scope: Generated initial implementation of API call from collaboration service to question service to fetch question details based on room settings;       
+// Author review: I validated correctness through user testing, edited for style and consistency, and added comments for clarity.
+
 const express = require('express');
 const cors = require('cors');
 
@@ -17,6 +22,7 @@ const toTitleCase = (value) => {
     .replace(/\b[a-z]/g, (char) => char.toUpperCase()); // Capitalize first letter of each word
 };
 
+// AI-generated (edited by Lim Yun Jie Ernest)
 async function fetchRandomQuestion(questionTopic, questionDifficulty) {
     const normalizedDifficulty = toTitleCase(questionDifficulty);
     const topicCandidates = [questionTopic, toTitleCase(questionTopic)]

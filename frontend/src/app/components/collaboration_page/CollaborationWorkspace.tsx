@@ -1,3 +1,8 @@
+// AI Assistance Disclosure:
+// Tool: Github Copilot, date: 2026‑04‑07
+// Scope: Generated initial implementation of CollaborationWorkspace to frontend and backend; 
+// Add functionality of user awareness when joining and leaving the page;       
+// Author review: I validated correctness through user testing, edited for style and consistency, and added comments for clarity. 
 import { Button } from "@/app/components/ui/button";
 import { Badge } from "@/app/components/ui/badge";
 import { Code2, Users, LogOut, User, Radio, History, Play, Loader2, Terminal, CheckCircle2, XCircle, ChevronDown, ChevronUp } from "lucide-react";
@@ -143,6 +148,7 @@ export function CollaborationWorkspace() {
   // Any value that can represent the current user in room participant entries.
   // This allows the UI to still mark "(You)" even when room data mixes formats
   // (for example, username in one event and userId/email in another).
+  // AI-generated (edited by Lim Yun Jie Ernest)
   const currentUserIdentifiers = useMemo(() => {
     const identifiers = [
       tokenPayload?.id,
@@ -163,6 +169,7 @@ export function CollaborationWorkspace() {
   // - Deduplicate repeated values
   // - Mark which entry belongs to current user
   // - Ensure current user always appears at least once in the list
+  // AI-generated (edited by Lim Yun Jie Ernest)
   const participants = useMemo<Participant[]>(() => {
     const roomParticipantUsernames = roomData?.participantUsernames || [];
     const participantList: Participant[] = [];
@@ -218,6 +225,7 @@ export function CollaborationWorkspace() {
     return peer?.name ?? "your peer";
   }, [participants]);
 
+  //AI-generated (edited by Lim Yun Jie Ernest)
   const descriptionParagraphs = useMemo(() => {
     const description = roomData?.questionDescription?.trim() || "";
     if (!description) {
@@ -339,6 +347,7 @@ export function CollaborationWorkspace() {
     fetchAttempts();
   }, [roomData?.questionId]);
 
+  // AI-generated (edited by Lim Yun Jie Ernest)
   const handleUserLeft = useCallback((departingUser: string) => {
     // Only toast for peers; suppress noisy self-leave notification.
     if (departingUser !== username) {
@@ -358,6 +367,7 @@ export function CollaborationWorkspace() {
     });
   }, [username]);
 
+  // AI-generated (edited by Lim Yun Jie Ernest)
   const handleUserJoined = useCallback((joinedUser: string) => {
     // Show toast only when another user joins, not for self
     if (joinedUser !== username) {
@@ -384,6 +394,7 @@ export function CollaborationWorkspace() {
   // Best-effort presence update on unload.
   // This helps peers remove this user from their participant panel quickly
   // without waiting for manual refresh.
+  // AI-generated (edited by Lim Yun Jie Ernest)
   useEffect(() => {
     const handleBeforeUnload = () => {
       chatboxRef.current?.sendUserLeft(username);
@@ -557,6 +568,7 @@ export function CollaborationWorkspace() {
   }, [executeCode, roomData?.programmingLanguage, roomData?.testCases]);
 
   // Leave room explicitly: notify peers and request backend mapping cleanup.
+  // AI-generated (edited by Lim Yun Jie Ernest)
   const handleLeaveRoom = useCallback(async () => {
     chatboxRef.current?.sendUserLeft(username);
 
@@ -621,6 +633,7 @@ export function CollaborationWorkspace() {
               <p className="text-purple-100 text-sm">Live coding session with {peerName}</p>
             </div>
           </div>
+          {/* AI-generated (edited by Lim Yun Jie Ernest) */}
           <AlertDialog open={isLeaveConfirmOpen} onOpenChange={setIsLeaveConfirmOpen}>
             <Button
               className="bg-red-500/80 text-white hover:bg-red-600 border-red-400/30"
@@ -669,6 +682,7 @@ export function CollaborationWorkspace() {
                 Live Session
               </Badge>
             </div>
+            {/* AI-generated (edited by Lim Yun Jie Ernest) */}
             <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-4">
               <div className="mt-2 space-y-1 text-sm leading-5 text-slate-700">
                 {descriptionParagraphs.length > 0 ? (
@@ -954,6 +968,7 @@ export function CollaborationWorkspace() {
           </div>
         </div>
 
+        {/* AI-generated (edited by Lim Yun Jie Ernest) */}
         <Chatbox
           ref={chatboxRef}
           roomId={roomId}
