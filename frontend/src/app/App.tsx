@@ -108,7 +108,7 @@ function MainAppPage() {
   }
 
   const navigationItems = [
-    { id: "matching" as Screen, label: "Match Dashboard", icon: Users },
+    { id: "matching" as Screen, label: "Matching Dashboard", icon: Users },
     ...(userRole === "admin" || userRole === "root-admin" ? [{ id: "questions" as Screen, label: "Question Library", icon: BookOpen }] : []),
     { id: "profile" as Screen, label: "Profile", icon: User },
     ...(userRole === "root-admin" ? [{ id: "admin" as Screen, label: "User Management", icon: Shield }] : []),
