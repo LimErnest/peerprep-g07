@@ -185,6 +185,18 @@ Detailed ReadMe generated, showing all the different functions and API routes an
 # Author Notes:
 Read through and verified the correctness of the things written
 
+
+# Date/Time:
+2026-04-12 13:35
+
+# Tool:
+GitHub Copilot (model: Claude Opus 4.6)
+
+# Prompt/Command:
+Explain how the code execution service works across three areas: sandboxed execution, output capture, and security/resource limits. Follow-up prompts to clarify Piston, Docker setup, language mapping, and the full request flow from frontend to Piston.
+
+# Output Summary:
+Provided detailed explanations of the code execution architecture, Piston sandbox engine, Docker Compose setup (piston, piston-init, code-execution-service containers), language mapping via LANGUAGE_CONFIG, and the full request chain (frontend → API Gateway → Code Execution Service → Piston). Generated presentation-ready bullet points for each topic.
 # Date/Time:
 2026-02-21 21:06
 
@@ -245,6 +257,20 @@ Added bearer token middleware that checks the user role through the user service
 - [ ] Rejected
 
 # Author Notes:
+Used explanations as basis for presentation slides. Refined wording for audience clarity.
+
+
+# Date/Time:
+2026-04-12 00:00
+
+# Tool:
+GitHub Copilot (model: Claude Opus 4.6)
+
+# Prompt/Command:
+Verify architecture diagram against codebase — check all service connections, databases, Redis instances, and missing components.
+
+# Output Summary:
+Identified that the diagram was missing Piston under Code Execution Service and the Question Service → User Service auth check arrow. Also clarified that for a deployment diagram, AWS RDS, S3, and Elastic Beanstalk boundaries should be shown.
 Adjusted the role check to match the actual internal auth route and verified 401, 403, and 200 responses with test tokens
 
 
@@ -266,6 +292,20 @@ Added multipart image upload handling, file validation, S3 integration, and imag
 - [ ] Rejected
 
 # Author Notes:
+Used findings to update architecture/deployment diagram for presentation.
+
+
+# Date/Time:
+2026-04-12 00:00
+
+# Tool:
+GitHub Copilot (model: Claude Opus 4.6)
+
+# Prompt/Command:
+Create a README for the code execution service, similar to how the other services have done.
+
+# Output Summary:
+Generated a full README covering: what the service does, tech stack, project structure, supported languages table, API endpoints with request/response examples, resource limits, environment variables, and how to run.
 Uploaded PNG and JPG files through Postman and confirmed the returned image URLs were stored and could be removed correctly
 
 
@@ -287,6 +327,20 @@ Added a scheduler that fetches LeetCode problems, maps the fields to the local s
 - [ ] Rejected
 
 # Author Notes:
+Read through and verified correctness against the actual codebase. Fixed a typo in the generated text.
+
+
+# Date/Time:
+2026-04-12 00:00
+
+# Tool:
+GitHub Copilot (model: Claude Opus 4.6)
+
+# Prompt/Command:
+Create a README for the frontend, similar to how the other services have done.
+
+# Output Summary:
+Generated a full README covering: what the frontend does, tech stack, project structure, screens table with access levels, environment variables, Nginx configuration, and how to run.
 The initial version needed cleanup for incomplete upstream data, so retry logic and stricter content checks were added after testing
 
 
@@ -308,6 +362,20 @@ Added a random question endpoint with query validation and a 404 response when n
 - [ ] Rejected
 
 # Author Notes:
+Read through and verified correctness against the actual codebase.
+
+
+# Date/Time:
+2026-04-12 13:15
+
+# Tool:
+GitHub Copilot (model: Claude Opus 4.6)
+
+# Prompt/Command:
+Create a README for the API gateway, similar to how the other services have done.
+
+# Output Summary:
+Generated a full README covering: what the gateway does, tech stack, project structure, full HTTP route mapping tables, WebSocket paths, middleware descriptions, proxied services, environment variables, and how to run.
 Called the endpoint with valid and invalid query parameters and confirmed the response shape matched frontend needs
 
 
@@ -329,6 +397,20 @@ Added pagination for the question list and returned total count, current page, p
 - [ ] Rejected
 
 # Author Notes:
+Read through and verified correctness against the actual codebase and route files.
+
+
+# Date/Time:
+2026-04-12 00:00
+
+# Tool:
+GitHub Copilot (model: Claude Opus 4.6)
+
+# Prompt/Command:
+Change the navigation header label from "Match Dashboard" to "Matching Dashboard" in App.tsx.
+
+# Output Summary:
+Updated the navigationItems array in App.tsx to change the label string.
 Tested first page, later pages, and out-of-range page requests to confirm pagination values were computed correctly
 
 
@@ -350,6 +432,7 @@ Added normalized duplicate checks and conflict responses for create and update r
 - [ ] Rejected
 
 # Author Notes:
+Visually confirmed the label change in the navigation bar.
 Tried creating duplicates with different spacing, trailing slashes, and query strings to confirm the service still rejected them consistently
 
 

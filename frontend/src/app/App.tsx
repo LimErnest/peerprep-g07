@@ -1,3 +1,8 @@
+// AI Assistance Disclosure:
+// Tool: GitHub Copilot (model: Claude Opus 4.6), date: 2026-04-12
+// Scope: Changed navigation label from "Match Dashboard" to "Matching Dashboard".
+// Author review: Verified the label change renders correctly in the navigation bar.
+
 import { useState, useEffect, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Button } from "@/app/components/ui/button";
@@ -108,7 +113,7 @@ function MainAppPage() {
   }
 
   const navigationItems = [
-    { id: "matching" as Screen, label: "Match Dashboard", icon: Users },
+    { id: "matching" as Screen, label: "Matching Dashboard", icon: Users },
     ...(userRole === "admin" || userRole === "root-admin" ? [{ id: "questions" as Screen, label: "Question Library", icon: BookOpen }] : []),
     { id: "profile" as Screen, label: "Profile", icon: User },
     ...(userRole === "root-admin" ? [{ id: "admin" as Screen, label: "User Management", icon: Shield }] : []),
