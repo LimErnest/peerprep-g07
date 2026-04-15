@@ -8,6 +8,8 @@ PeerPrep is a microservices-based collaborative coding platform. Users can authe
 
 This repository contains all services required to run the full system end-to-end.
 
+**Live deployment:** [http://peerprep.ap-southeast-1.elasticbeanstalk.com/](http://peerprep.ap-southeast-1.elasticbeanstalk.com/)
+
 ---
 
 ## Table of Contents
@@ -55,7 +57,7 @@ The system is split into independently deployable services:
 
 | Service | Default Port | Purpose |
 |---|---:|---|
-| `frontend` | `3038` | React SPA served by Nginx |
+| `frontend` | `80` (host) / `3038` (container) | React SPA served by Nginx |
 | `api-gateway` | `3004` | Single public backend entry point, HTTP/WS proxy, auth middleware |
 | `user-service` | `3000` | User accounts, authentication, role checks |
 | `question-service` | `3001` | Question CRUD, topic filters, random selection, image handling, scheduler |
@@ -72,10 +74,10 @@ The system is split into independently deployable services:
 
 - Frontend sends API requests to gateway under `/api/...`.
 - Gateway routes to downstream services and forwards JWT where needed.
-- Gateway also proxies WebSocket paths:
+- Gateway also proxies WebSocket paths (prefix-matched):
 	- `/ws/match`
-	- `/ws/yjs/:roomId`
-	- `/ws/chat/:roomId`
+	- `/ws/yjs/<roomId>`
+	- `/ws/chat/<roomId>`
 
 ---
 
@@ -94,7 +96,9 @@ The system is split into independently deployable services:
 |-- ai/
 |   `-- usage-log.md
 |-- docker-compose.yml
+|-- eslint.config.js
 |-- .env.example
+|-- LICENSE
 |-- package.json
 `-- README.md
 ```
@@ -107,6 +111,7 @@ Each service has its own `Dockerfile`, dependencies, and README.
 
 - Docker Desktop (or Docker Engine + Compose plugin)
 - Node.js 20+ (only needed for local non-Docker service development)
+- An external PostgreSQL instance (not included in Docker Compose)
 - A configured `.env` file at repository root
 - AWS credentials and bucket (required for question image upload features)
 
@@ -176,14 +181,15 @@ docker compose down -v
 
 After startup, access:
 
-- Frontend: `http://localhost:3038`
+- Frontend: `http://localhost` (port 80)
 - API Gateway: `http://localhost:3004`
 
-Health checks/examples:
+Health checks/examples (only reachable from within the Docker network or during local hybrid development):
 
 - `GET http://localhost:3001/health` (question service)
 - `GET http://localhost:3005/health` (code execution service)
 - `GET http://localhost:3006/health` (attempt history service)
+- `GET http://localhost:3004/api/health` (API gateway)
 
 ---
 
@@ -232,6 +238,7 @@ Public backend base URL:
 
 Main gateway route groups:
 
+- `/api/health`
 - `/api/auth`
 - `/api/users`
 - `/api/questions`
@@ -240,17 +247,17 @@ Main gateway route groups:
 - `/api/execute`
 - `/api/attempt-history`
 
-WebSocket endpoints (through gateway):
+WebSocket endpoints (through gateway, prefix-matched):
 
 - `ws://localhost:3004/ws/match`
-- `ws://localhost:3004/ws/yjs/:roomId`
-- `ws://localhost:3004/ws/chat/:roomId`
+- `ws://localhost:3004/ws/yjs/<roomId>`
+- `ws://localhost:3004/ws/chat/<roomId>`
 
 ---
 
 ## Data Stores and Persistence
 
-- PostgreSQL is used by user, question, and attempt history services.
+- PostgreSQL is used by user, question, and attempt history services. The database is **not** provisioned by Docker Compose — you must provide an external PostgreSQL instance via the `DB_HOST` environment variable.
 - Redis (primary) is used by matching service for queue and pending-match state.
 - Redis (collaboration) is used for room metadata, chat logs, and Yjs update persistence.
 - Piston runtime packages are persisted in the `piston-data` Docker volume.
