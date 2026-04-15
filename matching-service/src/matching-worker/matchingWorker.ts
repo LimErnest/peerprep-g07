@@ -248,7 +248,7 @@ async function pollAllQueues() {
     console.log(
       `Found active queue with 2+ users: ${queueKey}. Attempting exact match...`,
     );
-    const matched = await tryMatch(
+    await tryMatch(
       parsedQueue.topic,
       parsedQueue.difficulty,
       parsedQueue.language,
